@@ -1,3 +1,3 @@
-#Logistic Regression-Based IRL (deep version)
+# Logistic Regression-Based IRL (deep version)
 
 under construction.
