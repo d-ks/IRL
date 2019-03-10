@@ -1,2 +1,2 @@
 # IRL
-implementations of Inverse Reinforcement Leaning
+my (poor) implementations of Inverse Reinforcement Leaning
