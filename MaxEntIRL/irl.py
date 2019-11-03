@@ -31,6 +31,12 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
     n_data, N = np.shape(expert_traj)
     n_states, n_actions, _ = np.shape(P)
 
+    # make initial state distribution
+    P_init = np.zeros(n_states)
+    for i in range(n_data):
+        P_init[int(expert_traj[i][0])] += 1
+    P_init /= np.sum(P_init)
+
     # Initialize variables
     R = np.zeros(n_states)
     Pas = np.zeros((n_states, n_actions))
@@ -73,7 +79,7 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
 
         ### Forward pass
         # 4.
-        Dt[int(start_state)][0] = 1
+        Dt[:,0] = P_init
         # 5.
         for t in range(1,N):
             Dt[:,t] = np.einsum("i,ij,ijk->k",Dt[:,t-1],Pas,P)
