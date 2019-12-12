@@ -13,10 +13,11 @@ from tqdm import tqdm
 
 
 def f(state, n_states):
-    #return one-hot vector; 2 with n_states=4 -> [0 0 1 0]
+    # return one-hot vector; 2 with n_states=4 -> [0 0 1 0]
     f_vec = np.zeros(n_states)
     f_vec[int(state)] = 1
     return f_vec
+
 
 def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
     ### Input:
@@ -47,10 +48,10 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
     # Initialize theta
     theta = np.random.uniform(-0.01, 0.01, n_states)
 
-    #Calculate f from expert
+    # Calculate f from expert
     f_exp = np.zeros(n_states)
     for i in range(n_data):
-        traj = expert_traj[i,:]
+        traj = expert_traj[i, :]
         for s in range(N):
             f_exp += f(traj[s], n_states)
     f_exp /= n_data
@@ -67,7 +68,7 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
         # 1.
         Zs = np.ones(n_states)
         # 2.
-        PR = np.einsum("ijk,i->ijk", P, np.exp(R)) #This is constant in 1 iteration
+        PR = np.einsum("ijk,i->ijk", P, np.exp(R))  # This is constant in 1 iteration
         for _ in range(N):
             Za = np.einsum("ijk,k->ij", PR, Zs)
             Zs = np.sum(Za, axis=1)
@@ -75,18 +76,18 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
         ### Local action probability computation
         # 3.
         for s in range(n_states):
-            Pas[s,:] = Za[s,:] / Zs[s]
+            Pas[s, :] = Za[s, :] / Zs[s]
 
         ### Forward pass
         # 4.
-        Dt[:,0] = P_init
+        Dt[:, 0] = P_init
         # 5.
-        for t in range(1,N):
-            Dt[:,t] = np.einsum("i,ij,ijk->k",Dt[:,t-1],Pas,P)
+        for t in range(1, N):
+            Dt[:, t] = np.einsum("i,ij,ijk->k", Dt[:, t - 1], Pas, P)
 
         ### Summing frequencies
         # 6.
-        D = np.sum(Dt,axis=1)
+        D = np.sum(Dt, axis=1)
 
         #######################################################
 
@@ -101,16 +102,17 @@ def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
 
     return R
 
+
 #### test ####
 
 x_size = 5
 y_size = 5
 
-expert_traj = np.array([[10,11,12,13,14,9,4]])
+expert_traj = np.array([[10, 11, 12, 13, 14, 9, 4]])
 
 #####################################
 
-n_states = int(x_size*y_size)
+n_states = int(x_size * y_size)
 start_state = 10
 
 # make P of gridworld
