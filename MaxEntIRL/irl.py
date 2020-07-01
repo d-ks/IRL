@@ -19,7 +19,7 @@ def f(state, n_states):
     return f_vec
 
 
-def MaxEntIRL(expert_traj, P, start_state, n_epoch=10000, alpha=0.05):
+def MaxEntIRL(expert_traj, P, n_epoch=10000, alpha=0.05):
     ### Input:
     # expert_traj: numpy array, ( length_of_trajectories X num_of_trajectories );
     ## like [[0,1,2,2],[0,1,3,2], [0,1,2,3]]
@@ -113,13 +113,12 @@ expert_traj = np.array([[10, 11, 12, 13, 14, 9, 4]])
 #####################################
 
 n_states = int(x_size * y_size)
-start_state = 10
 
 # make P of gridworld
 P = makeProb(x_size, y_size)
 
 # run maxent irl
-R = MaxEntIRL(expert_traj, P, start_state)
+R = MaxEntIRL(expert_traj, P)
 
 print(R)
 
