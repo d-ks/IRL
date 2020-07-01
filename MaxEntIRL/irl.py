@@ -24,7 +24,6 @@ def MaxEntIRL(expert_traj, P, n_epoch=10000, alpha=0.05):
     # expert_traj: numpy array, ( length_of_trajectories X num_of_trajectories );
     ## like [[0,1,2,2],[0,1,3,2], [0,1,2,3]]
     # P : numpy array, (S x A x S); state transition probability
-    # start_state : state when agent exists with initialized environment at first.
     # n_epoch : number of learning iterations.
     # alpha : hyperparameter of gradient ascent.
 
