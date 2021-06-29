@@ -105,7 +105,7 @@ def MaxEntIRL(expert_traj, P, n_epoch=10000):
             Df += D[s] * f(s, n_states)
         th_grad = f_exp - Df
 
-        # Update theta with naive Gradient Ascent
+        # Update theta with Gradient Ascent
         ## Adam implementation
         t = i + 1
         m_t = beta1 * m_t + (1 - beta1) * th_grad
