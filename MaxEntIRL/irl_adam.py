@@ -25,7 +25,6 @@ def MaxEntIRL(expert_traj, P, n_epoch=10000):
     ## like [[0,1,2,2],[0,1,3,2], [0,1,2,3]]
     # P : numpy array, (S x A x S); state transition probability
     # n_epoch : number of learning iterations.
-    # alpha : hyperparameter of gradient ascent.
 
     # Adam param
     alpha = 0.001
@@ -40,7 +39,7 @@ def MaxEntIRL(expert_traj, P, n_epoch=10000):
     n_data, N = np.shape(expert_traj)
     n_states, n_actions, _ = np.shape(P)
 
-    # make initial state distribution
+    # Make initial state distribution
     P_init = np.zeros(n_states)
     for i in range(n_data):
         P_init[int(expert_traj[i][0])] += 1
@@ -107,7 +106,7 @@ def MaxEntIRL(expert_traj, P, n_epoch=10000):
         th_grad = f_exp - Df
 
         # Update theta with naive Gradient Ascent
-        # Adam implementation
+        ## Adam implementation
         t = i + 1
         m_t = beta1 * m_t + (1 - beta1) * th_grad
         v_t = beta2 * v_t + (1 - beta2) * (th_grad**2)
