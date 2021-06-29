@@ -4,7 +4,7 @@ Ziebart, B. D., Maas, A. L., Bagnell, J. A., & Dey, A. K. (2008, July). Maximum 
 [paper](https://www.aaai.org/Papers/AAAI/2008/AAAI08-227.pdf)
 
 ## Pseudocode of the algorithm
-![algorithm](maxentirl.png)
+<img src="maxentirl.png" width="200px">
 
 ## Implemented variants
 - irl.py : MaxEntIRL with naive gradient ascent.
