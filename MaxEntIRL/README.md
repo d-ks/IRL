@@ -6,4 +6,4 @@ Ziebart, B. D., Maas, A. L., Bagnell, J. A., & Dey, A. K. (2008, July). Maximum 
 
 ## Implemented variants
 - irl.py : MaxEntIRL with naive gradient ascent.
-- irl_adam.py : MaxEntIRL with Adam optimizer. For gridworld env, the convergence seems to be stable.
+- irl_adam.py : MaxEntIRL with Adam optimizer. For gridworld env, this method seems to be stable.
